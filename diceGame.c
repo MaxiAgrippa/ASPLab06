@@ -141,6 +141,13 @@ int main(int argc, char *argv[])
             write(STDERR_FILENO, "read sharedFile.bin error!\n", 27);
             exit(1);
         }
+        // write Referee label to screen
+        if (write(STDOUT_FILENO, "Referee: ", 9) == -1)
+        {
+            // error handle.
+            write(STDERR_FILENO, "write to screen error!\n", 23);
+            exit(1);
+        }
         // write player name to screen
         if (write(STDOUT_FILENO, names[index], 4) == -1)
         {
@@ -171,7 +178,7 @@ int main(int argc, char *argv[])
             kill(TATApid, SIGKILL); // kill TATA
             kill(TITIpid, SIGKILL); // kill TITI
             kill(TOTOpid, SIGKILL); // kill TOTO
-            kill(getpid(), SIGKILL);
+            kill(getpid(), SIGKILL); // kill referee itself
         }
         // referee process sleep for 2 seconds.
         sleep(2);
